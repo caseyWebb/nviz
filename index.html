@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aquarium Nitrogen Cycle Visualizer</title>
+</head>
+<body>
+  <button data-bind="text: paused() ? 'Start' : 'Pause', click: togglePlayState"></button>
+
+  <br>
+
+  <label for="bioload">bioload</label>
+  <input type="range" name="bioload" id="bioload-slider" data-bind="value: bioload"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js" integrity="sha512-vs7+jbztHoMto5Yd/yinM4/y2DOkPLt0fATcN+j+G4ANY2z4faIzZIOMkpBmWdcxt+596FemCh9M18NUJTZwvw==" crossorigin="anonymous"></script>
+  <script>
+    class ViewModel {
+      counter = 1
+      paused = ko.observable(true)
+
+      // ppm/time
+      bioload = ko.observable(10)
+      plants = ko.observable(0)
+      nitrosomonas = ko.observable(0)
+      nitrobacter = ko.observable(0)
+      
+      // ppm
+      ammonia = ko.observable(0)
+      nitrite = ko.observable(0)
+      nitrate = ko.observable(0)
+
+      wcFrequency = ko.observable(7)
+      wcPercent = ko.observable(20)
+
+      constructor() {
+        this.paused.subscribe((v) => v ? clearInterval(this.interval) : this.start())
+      }
+
+      start() {
+        this.interval = setInterval(this.iterate.bind(this), 1000)
+      }
+
+      stop() {
+        clearInterval(this.interval)
+      }
+
+      togglePlayState() {
+        this.paused(!this.paused())
+      }
+
+      iterate() {
+        const bioload = this.bioload()
+        const plants = this.plants()
+        let ammonia = this.ammonia()
+        let nitrite = this.nitrite()
+        let nitrate = this.nitrate()
+        let nitrosomonas = this.nitrosomonas()
+        let nitrobacter = this.nitrobacter()
+        
+        ammonia += bioload
+        
+        const processedAmmonia = Math.min(nitrosomonas, ammonia)
+        
+        ammonia -= processedAmmonia
+        nitrite += processedAmmonia
+        
+        const processedNitrite = Math.min(nitrobacter, nitrite)
+        
+        nitrite -= processedNitrite
+        nitrate += processedNitrite
+
+        const processedNitrate = Math.min(Math.floor(plants / 10), nitrate)
+
+        nitrate -= processedNitrate
+        
+        if (ammonia > 5) nitrosomonas += 1
+        else if (processedAmmonia < nitrosomonas) nitrosomonas -= 1
+        
+        if (nitrite > 5) nitrobacter += 1
+        else if (processedNitrite < nitrobacter) nitrobacter -= 1
+
+        this.ammonia(ammonia)
+        this.nitrite(nitrite)
+        this.nitrate(nitrate)
+        this.nitrosomonas(nitrosomonas)
+        this.nitrobacter(nitrobacter)
+
+        if (this.counter++ % this.wcFrequency() === 0) {
+          this.performWaterChange(this.wcPercent())
+        }
+        
+        console.log('ammonia:', this.ammonia(), 'nitrite:', this.nitrite(), 'nitrate:', this.nitrate(), 'nitrosomonas:', this.nitrosomonas(), 'nitrobacter:', this.nitrobacter())
+      }
+      
+      performWaterChange(amount) {
+        console.log('water change')
+        const dilute = (obs) => obs(Math.ceil(obs() * (100 - this.wcPercent()) / 100))
+        dilute(this.ammonia)
+        dilute(this.nitrite)
+        dilute(this.nitrate)
+      }
+    }
+
+    ko.applyBindings(new ViewModel(), document.body)
+  </script>
+</body>
+</html>
