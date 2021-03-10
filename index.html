@@ -38,6 +38,10 @@
       font-weight: 600;
       padding-bottom: .5rem;
     }
+    .indicator-label .description {
+      font-size: 1rem;
+      color: #666;
+    }
     .indicator {
       min-height: 50px;
       height: 100%;
@@ -96,12 +100,42 @@
   <h1>nviz | aquarium nitrogen cycle visualizer</h1>
 
   <div class="indicators">
-    <parameter-indicator params="name: 'bioload',       value: bioload,       scale: 10"></parameter-indicator>
-    <parameter-indicator params="name: 'ammonia',       value: ammonia,       scale: 20"></parameter-indicator>
-    <parameter-indicator params="name: 'nitrosomonas',  value: nitrosomonas,  scale: 10"></parameter-indicator>
-    <parameter-indicator params="name: 'nitrite',       value: nitrite,       scale: 32"></parameter-indicator>
-    <parameter-indicator params="name: 'nitrobacter',   value: nitrobacter,   scale: 10"></parameter-indicator>
-    <parameter-indicator params="name: 'nitrate',       value: nitrate,       scale: 1"></parameter-indicator>
+    <parameter-indicator params="
+      name: 'bioload',
+      description: 'ammonia addition rate (ppm/time)',
+      value: bioload,
+      scale: 10
+    "></parameter-indicator>
+    <parameter-indicator params="
+      name: 'ammonia',
+      description: 'concentration (ppm)',
+      value: ammonia,
+      scale: 20
+    "></parameter-indicator>
+    <parameter-indicator params="
+      name: 'nitrosomonas',
+      description: 'size of bacterial colony processing NH<sub>3</sub>/NH<sub>4<super>+</super></sub> &rArr; NO<sub>2<super>-</super></sub> (population)',
+      value: nitrosomonas,
+      scale: 10
+    "></parameter-indicator>
+    <parameter-indicator params="
+      name: 'nitrite',
+      description: 'concentration (ppm)',
+      value: nitrite,
+      scale: 32
+    "></parameter-indicator>
+    <parameter-indicator params="
+      name: 'nitrobacter',
+      description: 'size of bacterial colony processing NO<sub>2<super>-</super></sub> &rArr; NO<sub>3<super>-</super></sub> (population)',
+      value: nitrobacter,
+      scale: 10
+    "></parameter-indicator>
+    <parameter-indicator params="
+      name: 'nitrate',
+      description: 'concentration (ppm)',
+      value: nitrate,
+      scale: 1
+    "></parameter-indicator>
   </div>
 
   <div class="controls">

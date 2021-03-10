@@ -3,7 +3,7 @@
 'use strict'
 
 ko.components.register('parameter-indicator', {
-  template: `<div class="indicator-label" data-bind="text: name"></div><div class="indicator" data-bind="css: name, style: { width: (scale * value()) + 'px' }"></div>`,
+  template: `<div class="indicator-label" data-bind="html: name + ' <span class=description>/ ' + description + '</span>'"></div><div class="indicator" data-bind="css: name, style: { width: (scale * value()) + 'px' }"></div>`,
 })
 
 function incrementObs(obs, n) {
