@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aquarium Nitrogen Cycle Visualizer</title>
   <style>
-    html, body {
+    html {
       color: #333;
       height: 100%;
     }
     body {
+      min-height: 100%;
       padding: 3rem;
       display: flex;
       flex-direction: column;
@@ -38,6 +39,7 @@
       padding-bottom: .5rem;
     }
     .indicator {
+      /* min-height: 50px; */
       height: 100%;
       flex-grow: 1;
       transition: width linear 1s;
