@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aquarium Nitrogen Cycle Visualizer</title>
+  <title>nviz | Aquarium Nitrogen Cycle Visualizer</title>
   <style>
     html {
       color: #333;
@@ -123,6 +123,12 @@
     <label for="wcamt">water change amount (%)</label>
     <input type="range" min="5" max="100" data-bind="value: waterChangePercent"/>
     <input type="number" name="wcamt" min="5" max="100" data-bind="value: waterChangePercent"/>
+  </div>
+
+  <hr>
+
+  <div class="about">
+    This demo <em>roughly</em> models the process of cycling an aquarium. Scale and time are arbitrary, and this only serves as an educational tool for explaining the fundamental processes at play and how changes impact the system. It is not intended to be a cycling or water change calculator in any respect but rather to aid you in reading your own water tests and <em>why</em> we do what we do.
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js" integrity="sha512-vs7+jbztHoMto5Yd/yinM4/y2DOkPLt0fATcN+j+G4ANY2z4faIzZIOMkpBmWdcxt+596FemCh9M18NUJTZwvw==" crossorigin="anonymous"></script>

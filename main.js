@@ -16,7 +16,6 @@ class ViewModel {
 
   // ppm/time
   bioload = ko.observable(0)
-  plants = ko.observable(0)
   nitrosomonas = ko.observable(0)
   nitrobacter = ko.observable(0)
 
@@ -68,7 +67,6 @@ class ViewModel {
 
   iterate() {
     const bioload = parseInt(this.bioload(), 10)
-    const plants = this.plants()
     let ammonia = this.ammonia()
     let nitrite = this.nitrite()
     let nitrate = this.nitrate()
@@ -106,9 +104,6 @@ class ViewModel {
       nitrobacter -= (nitrobacter - processedNitrite) * 0.7 // dying bacteria feeds other bacteria
     }
     nitrate += processedNitrite
-
-    const processedNitrate = Math.min(Math.floor(plants / 10), nitrate)
-    nitrate -= processedNitrate
 
     this.ammonia(ammonia)
     this.nitrite(nitrite)
