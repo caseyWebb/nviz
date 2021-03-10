@@ -8,18 +8,29 @@
   <style>
     html, body {
       color: #333;
-      padding: 1rem;
       height: 100%;
+    }
+    body {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    h1 {
+      margin-bottom: 5rem;
     }
     .indicators {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-evenly;
-      align-items: flex-end;
-      min-height: 80%;
+      align-items: flex-start;
+      flex-grow: 1;
     }
     .indicators > * {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 3rem;
     }
     .indicator-label {
       font-size: 24px;
@@ -27,8 +38,9 @@
       padding-bottom: .5rem;
     }
     .indicator {
-      max-width: 300px;
-      transition: height linear 1s;
+      height: 100%;
+      flex-grow: 1;
+      transition: width linear 1s;
     }
     .indicator.bioload { background-color: rgb(20, 8, 133); }
     .indicator.ammonia { background-color: rgb(106, 235, 32); }
@@ -36,10 +48,6 @@
     .indicator.nitrate { background-color: rgb(241, 158, 2); }
     .indicator.nitrosomonas { background-color: rgb(146, 64, 167); }
     .indicator.nitrobacter { background-color: rgb(151, 25, 99); }
-
-    .controls {
-      margin-top: 3rem;
-    }
 
     button {
       background-color: white;

@@ -3,7 +3,7 @@
 'use strict'
 
 ko.components.register('parameter-indicator', {
-  template: `<div class="indicator-label" data-bind="text: name"></div><div class="indicator" data-bind="css: name, style: { height: (scale * value()) + 'px' }"></div>`,
+  template: `<div class="indicator-label" data-bind="text: name"></div><div class="indicator" data-bind="css: name, style: { width: (scale * value()) + 'px' }"></div>`,
 })
 
 function incrementObs(obs, n) {
@@ -82,7 +82,7 @@ class ViewModel {
     if (ammonia > 0) {
       const populationIncrease = Math.min(
         ammonia,
-        nitrosomonas === 0 && ammonia > 1 ? 0.1 : nitrosomonas
+        nitrosomonas <= 0 && ammonia > 1 ? 0.1 : nitrosomonas
       )
       nitrosomonas += populationIncrease
       ammonia -= populationIncrease
@@ -97,7 +97,7 @@ class ViewModel {
     if (nitrite > 0) {
       const populationIncrease = Math.min(
         nitrite,
-        nitrobacter === 0 && nitrite > 1 ? 0.1 : nitrobacter
+        nitrobacter <= 0 && nitrite > 1 ? 0.1 : nitrobacter
       )
       nitrobacter += populationIncrease
       nitrite -= populationIncrease
