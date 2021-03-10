@@ -97,7 +97,7 @@ class ViewModel {
     if (nitrite > 0) {
       const populationIncrease = Math.min(
         nitrite,
-        nitrobacter === 0 && nitrite > 1 ? 0.1 : nitrobacter * 0.5
+        nitrobacter === 0 && nitrite > 1 ? 0.1 : nitrobacter
       )
       nitrobacter += populationIncrease
       nitrite -= populationIncrease
@@ -118,7 +118,7 @@ class ViewModel {
 
     if (
       this.waterChangeFrequency() > 0 &&
-      this.counter++ % (100 - this.waterChangeFrequency()) === 0
+      this.counter++ % (9 - this.waterChangeFrequency()) === 0
     ) {
       this.performWaterChange(this.waterChangePercent())
     }

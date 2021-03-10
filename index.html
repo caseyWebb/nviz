@@ -86,7 +86,7 @@
   <h1>nviz | aquarium nitrogen cycle visualizer</h1>
 
   <div class="indicators">
-    <parameter-indicator params="name: 'bioload',       value: bioload,       scale: 20"></parameter-indicator>
+    <parameter-indicator params="name: 'bioload',       value: bioload,       scale: 10"></parameter-indicator>
     <parameter-indicator params="name: 'ammonia',       value: ammonia,       scale: 20"></parameter-indicator>
     <parameter-indicator params="name: 'nitrosomonas',  value: nitrosomonas,  scale: 10"></parameter-indicator>
     <parameter-indicator params="name: 'nitrite',       value: nitrite,       scale: 32"></parameter-indicator>
@@ -106,9 +106,9 @@
     <button data-bind="click: () => performWaterChange(50)">50% Water Change</button>
     <button data-bind="click: () => performWaterChange(90)">90% Water Change</button>
     <br>
-    <label for="wcfreq">water change frequency (0 = disable automatic water changes, 100 = most frequent)</label>
-    <input type="range" data-bind="value: waterChangeFrequency"/>
-    <input type="number" name="wcfreq" min="0" max="100" data-bind="value: waterChangeFrequency"/>
+    <label for="wcfreq">water change frequency (0 = disable automatic water changes, 10 = most frequent)</label>
+    <input type="range" min="0" max="10" data-bind="value: waterChangeFrequency"/>
+    <input type="number" name="wcfreq" min="0" max="10" data-bind="value: waterChangeFrequency"/>
     <br>
     <label for="wcamt">water change amount (%)</label>
     <input type="range" min="5" max="100" data-bind="value: waterChangePercent"/>
