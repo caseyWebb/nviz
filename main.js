@@ -56,7 +56,7 @@ class ViewModel {
   }
 
   increaseBioload(n) {
-    incrementObs(this.bioload, n)
+    this.bioload(Math.min(100, this.bioload() + n))
   }
 
   performWaterChange(pct) {
